@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
-  state = { buses: null };
+  state = { buses: [] };
 
   componentDidMount() {
     fetch(
@@ -13,14 +13,15 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
-        debugger;
         this.setState({
-          buses: json[0].DIRECTION
+          buses: json
         });
       });
   }
 
   render() {
+    const { buses } = this.state;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -28,7 +29,14 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
-          <p>{this.state.buses}</p>
+          <div>
+            {buses.map(bus => (
+              <>
+                <p>{bus.LONGITUDE}</p>
+                <p>{bus.LATITUDE}</p>
+              </>
+            ))}
+          </div>
           <a
             className="App-link"
             href="https://reactjs.org"
