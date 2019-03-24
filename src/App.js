@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Map from "./Map.js";
 import "./App.css";
 
 class App extends Component {
@@ -23,11 +24,12 @@ class App extends Component {
 
     return (
       <div className="App">
+        <Map isMarkerShown />
         {buses.map(bus => (
-          <>
+          <div key={bus.VEHICLE}>
             <p>{bus.LONGITUDE}</p>
             <p>{bus.LATITUDE}</p>
-          </>
+          </div>
         ))}
       </div>
     );
