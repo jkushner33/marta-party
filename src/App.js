@@ -3,6 +3,23 @@ import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
+  state = { buses: null };
+
+  componentDidMount() {
+    fetch(
+      "http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus"
+    )
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        debugger;
+        this.setState({
+          buses: json[0].DIRECTION
+        });
+      });
+  }
+
   render() {
     return (
       <div className="App">
@@ -11,6 +28,7 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
+          <p>{this.state.buses}</p>
           <a
             className="App-link"
             href="https://reactjs.org"
