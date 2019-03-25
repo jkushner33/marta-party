@@ -18,9 +18,24 @@ const Map = compose(
   withScriptjs,
   withGoogleMap
 )(props => (
-  <GoogleMap defaultZoom={2} defaultCenter={{ lat: 33.749, lng: -84.388 }}>
-    {props.isMarkerShown && <Marker position={{ lat: 33.749, lng: -84.388 }} />}
-    {props.isMarkerShown && <Marker position={{ lat: 44.749, lng: -84.388 }} />}
+  <GoogleMap defaultZoom={12} defaultCenter={{ lat: 33.749, lng: -84.388 }}>
+    {props.buses.map(bus => {
+      const vehicleNumber = parseInt(bus.VEHICLE);
+      const routeNumber = bus.ROUTE;
+      const latitude = parseFloat(bus.LATITUDE);
+      const longitude = parseFloat(bus.LONGITUDE);
+
+      return (
+        <Marker
+          key={vehicleNumber}
+          label={routeNumber}
+          position={{
+            lat: latitude,
+            lng: longitude
+          }}
+        />
+      );
+    })}
   </GoogleMap>
 ));
 

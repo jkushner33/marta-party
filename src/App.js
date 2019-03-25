@@ -24,13 +24,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Map isMarkerShown />
-        {buses.map(bus => (
-          <div key={bus.VEHICLE}>
-            <p>{bus.LONGITUDE}</p>
-            <p>{bus.LATITUDE}</p>
-          </div>
-        ))}
+        <Map buses={buses} />
       </div>
     );
   }
